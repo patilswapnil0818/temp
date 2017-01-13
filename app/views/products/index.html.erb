@@ -1,0 +1,39 @@
+<!--<p id="notice"><%= notice %></p>-->
+<div class="col-md-12 padding-left-35">
+  <%= form_tag products_path, :method => 'get' do %>
+    <%= text_field_tag :search, params[:search], :placeholder => 'Search by any field' %>
+    <%= submit_tag 'Search' %>
+  <%end%>
+</div>
+<div class="col-md-12">
+  <% if @products.nil? %>
+      <div></div>
+  <%else%>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Color</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= product.price %></td>
+            <td><%= product.category %></td>
+            <td><%= product.color %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+  <!---->
+    <!--<%= link_to 'New Product', new_product_path %>-->
+  <%end%>
+</div>

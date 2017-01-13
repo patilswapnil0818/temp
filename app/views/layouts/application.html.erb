@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wiseguy</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="jumbotron black-bg-color">
+  <div class="col-md-12 col-xs-12">
+    <div class="col-md-6 col-xs-6 float-left">
+      <a href="products"><img id="drag1" src="/assets/wise-guy.png" draggable="true" ondragstart="drag(event)" width="auto" height="45px"></a>
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <% if user_signed_in? %>
+          <div class="dropdown dropdown-menu-list float-right">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Welcome <%=current_user.name%>
+              <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+
+            </ul>
+          </div>
+          <a href="/products"><button class="btn btn-primary dropdown-toggle float-right">Home</button></a>
+          <% if current_user.admin? %>
+            <a href="/admin"><button class="btn btn-primary dropdown-toggle float-right">Admin</button></a>
+          <%end%>
+
+      <%else%>
+        <%= link_to 'Sign Up', new_user_registration_path, :class => "btn btn-primary dropdown-toggle float-right" %>
+        <%= link_to 'Login', new_user_session_path, :class => "btn btn-primary dropdown-toggle float-right" %>
+        <a href="/products"><button class="btn btn-primary dropdown-toggle float-right">Home</button></a>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<%= yield %>
+
+</body>
+</html>
